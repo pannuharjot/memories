@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { getPosts, createPost } from '../controllers/posts.js'
-
+import { deletePost,getPosts, createPost, updatePost, likePost } from '../controllers/posts.js'
+import auth from '../middleware/auth.js'
 const router = Router();
 
 // localhost:5000/posts/
@@ -10,6 +10,14 @@ const router = Router();
 
 router.get('/', getPosts);
 
-router.post('/', createPost);
+router.post('/', auth, createPost);
 
-export default router;
+router.patch('/:id', auth, updatePost);
+
+router.delete('/:id',auth,  deletePost);
+
+router.patch('/:id/likePost', auth, likePost);
+
+
+
+export default router; 
